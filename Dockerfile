@@ -12,4 +12,8 @@ RUN mkdir -p /pb/pb_data && \
 
 EXPOSE 8080
 
-CMD ["/pb/pocketbase", "serve", "--http=0.0.0.0:8080", "--dir=/pb/pb_data"]
+# Startup script: cria superusuário se não existir, depois sobe o servidor
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
+
+CMD ["/start.sh"]
